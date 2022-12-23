@@ -1,0 +1,19 @@
+%h3 Users
+= link_to "New User", new_user_path, class: "btn btn-primary float-end"
+%table.table.table-responsive.table-striped
+  %thead
+    %tr
+      %td Name
+      %td Email
+      %td Role
+      %td Created at
+      %td Edit
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= user.name
+        %td= user.email
+        %td= user.role.capitalize
+        %td= user.created_at.strftime("%Y-%m-%d")
+        %td= link_to "Edit", edit_user_path(user)
+
