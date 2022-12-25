@@ -1,0 +1,16 @@
+
+.row.border.p-3.justify-content-center
+  .col-12.col-lg-6
+    %h4.text-center Administrator login
+    = form_with url: admin_login_path, method: :post, class: "border p-2" do |f|
+      .mb-3
+        %label.form-label Email
+        = f.text_field :email, class: "form-control"
+      .mb-3
+        %label.form-label Password
+        = f.password_field :password,  class: "form-control"
+      .mb-3.form-check
+        %label.form-check-label{:for => "remember_me"} Remember me
+        = f.check_box :remember_me, class: "form-check-input"
+      .d-flex.justify-content-end
+        = f.submit "Login", class: "btn btn-primary"

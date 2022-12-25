@@ -1,0 +1,41 @@
+= form_with model: [:admin, user], class: "border p-3", id: dom_id(user) do |f|
+  .mb-3
+    = link_to request.referer || admin_users_path, class: "btn btn-sm btn-default border" do
+      = fa_icon "arrow-left", text: "Back"
+    = button_tag class: "btn btn-primary btn-sm ms-3" do
+      = fa_icon "save", text: "Save"
+
+
+
+  - if user.errors.any?
+    .alert.alert-warning{:role => "alert"}
+      Could not create a user due to the following issues:
+      %ul
+        - user.errors.each do |error|
+          %li= error.full_message
+  .mb-3.row.align-items-center
+    .col-3
+      %label.form-label Name
+    .col-auto
+      = f.text_field :name, class: "form-control"
+  .mb-3.row.align-items-center
+    .col-3
+      %label.form-label Email
+    .col-auto
+      = f.text_field :email, class: "form-control"
+  - if user.new_record?
+    .mb-3.row.align-items-center
+      .col-3
+        %label.form-label Password
+      .col-auto
+        = f.password_field :password,  class: "form-control"
+    .mb-3.row.align-items-center
+      .col-3
+        %label.form-label Confirm password
+      .col-auto
+        = f.password_field :password_confirmation,  class: "form-control"
+  .row.align-items-center
+    .col-3
+      %label.form-label Role
+    .col-auto
+      = f.select :role,  options_for_select(User::ROLES, user.role), {include_blank: "Select role"}, class: "form-select"

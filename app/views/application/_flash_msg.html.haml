@@ -1,0 +1,4 @@
+- flash.each do |type, msg|
+  %div.alert-dismissible.fade.show{ class: "alert alert-#{type == 'notice' ? 'success' : 'secondary'}", role: "alert" }
+    %span= msg
+    %button.btn-close.float-end{ type: "button", "data-bs-dismiss": "alert", "aria-label": "Close"}

@@ -4,13 +4,18 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  resources :admin, only: [:index] do
-    collection do
-      # match :login, to: "admin#login", via: [:post, :get]
-      get :login
-      post :login
+  namespace :admin do
+    root "users#index"
+    match :login, to: "sessions#create", via: [:get, :post], as: :login
+    delete :logout, to: "sessions#destroy"
+
+    resources :users
+    resources :tests do
+      resources :questions
+      resources :options
     end
+
   end
 
-  resources :users
+  resources :users, except: :index
 end

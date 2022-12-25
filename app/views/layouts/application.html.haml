@@ -10,4 +10,7 @@
     = javascript_importmap_tags
   %body
     .container.mt-2
+      - if current_user
+        = render 'navbar'
+      = render 'flash_msg'
       = yield

@@ -1,0 +1,14 @@
+%nav.navbar.navbar-expand-lg.navbar-light.bg-light.mb-2
+  .container-fluid
+    %a.navbar-brand{href: admin_root_path} Exam System
+    %button.navbar-toggler{"aria-controls" => "navbarNav", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#navbarNav", "data-bs-toggle" => "collapse", :type => "button"}
+      %span.navbar-toggler-icon
+    #navbarNav.collapse.navbar-collapse
+      %ul.navbar-nav.ms-auto
+        %li.nav-item
+          %a.nav-link{href: admin_users_path, class: 'active'} Users
+        %li.nav-item
+          %a.nav-link{href: admin_tests_path } Tests
+        %li.nav-item
+          %a.nav-link{href: admin_logout_path, data: {turbo_method: :delete}} Sign Out
+

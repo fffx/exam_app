@@ -77,4 +77,4 @@ end
 
 
 gem "haml-rails", "~> 2.0"
-
+gem 'font_awesome5_rails'
