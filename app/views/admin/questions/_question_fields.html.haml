@@ -1,0 +1,23 @@
+%fieldset.border.p-3.mb-3
+  - if f.object.errors.any?
+    .alert.alert-warning{:role => "alert"}
+      Could not create a question due to the following issues:
+      %ul
+        - f.object.errors.each do |error|
+          %li= error.full_message
+  .mb-3.row
+    .col-10
+      = f.text_field :name, placeholder: 'Give the question a label here...', class: "form-control"
+    .col-2
+      = button_tag class: "btn btn-default border btn-sm", type: "button", data: {action: 'tests#deleteQuestion', "tests-question-id-param": f.object.id} do
+        = fa_icon "trash", text: "question"
+  .mb-3
+    = f.text_area :description, placeholder: 'Enter a description here...', class: "form-control"
+  %div{id: "option-forms-#{question_index}"}
+    = f.fields_for :options do |options_form|
+      = render "admin/questions/option_fields", f: options_form, option_index: f.index
+
+  .row.actions
+    .col-auto
+      = link_to new_option_form_admin_tests_path(question_index: question_index), class: "btn btn-secondary btn-sm", "data-turbo-stream": true, id: 'add-question' do
+        = fa_icon "plus", text: "Option"

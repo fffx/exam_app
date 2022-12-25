@@ -6,9 +6,9 @@
     #navbarNav.collapse.navbar-collapse
       %ul.navbar-nav.ms-auto
         %li.nav-item
-          %a.nav-link{href: admin_users_path, class: 'active'} Users
+          %a.nav-link{href: admin_users_path, class: request.path =~ /^\/admin(\/users|)$/ ? 'active' : ''  } Users
         %li.nav-item
-          %a.nav-link{href: admin_tests_path } Tests
+          %a.nav-link{href: admin_tests_path, class: request.path =~ /^\/admin\/tests/ ? 'active' : ''   } Tests
         %li.nav-item
           %a.nav-link{href: admin_logout_path, data: {turbo_method: :delete}} Sign Out
 

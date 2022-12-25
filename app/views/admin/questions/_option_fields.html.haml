@@ -1,0 +1,11 @@
+%fieldset.mb-2
+  .mb-3.row
+    .col-8
+      = f.text_field :name, placeholder: 'Give a ption here...', class: "form-control"
+    .col-3
+      .form-check
+        %label.form-check-label{for: "is_correct_#{option_index}"} Correct answer
+        = f.check_box :is_correct, id: "is_correct_#{option_index}", class: "form-check-input"
+    .col-1
+      = button_tag class: "btn btn-default border btn-sm", type: "button", data: {action: 'tests#deleteOption', "tests-option-id-param": f.object.id} do
+        = fa_icon "trash"

@@ -51,15 +51,14 @@ class Admin::UsersController < Admin::AdminController
   end
 
 
-
-
   private
-    def user_params
-      params.require(:user).permit(:email, :password, :role, :name, :password_confirmation)
-    end
 
-    def load_user!
-      # debugger
-      @user = User.find(params[:id])
-    end
+  def user_params
+    params.require(:user).permit(:email, :password, :role, :name, :password_confirmation)
+  end
+
+  def load_user!
+    # debugger
+    @user = User.find(params[:id])
+  end
 end

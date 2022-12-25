@@ -1,0 +1,5 @@
+= turbo_stream.append "question-forms" do
+  - fields model: @test do |f|
+    - question_index = Time.current.to_i
+    - f.fields_for "[questions_attributes][#{question_index}]", @test.questions[0] do |question_form|
+      = render "question_fields", f: question_form, question_index: question_index

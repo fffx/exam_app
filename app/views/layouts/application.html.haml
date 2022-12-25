@@ -13,4 +13,6 @@
       - if current_user
         = render 'navbar'
       = render 'flash_msg'
-      = yield
+      .row.p-3.justify-content-center
+        .col-12.col-lg-9
+          = yield

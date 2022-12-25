@@ -11,6 +11,4 @@ admin = User.find_or_initialize_by(email: "teacher@example.com")
 
 admin.password ='12345678'
 admin.role = :teacher
-
-
 admin.save!

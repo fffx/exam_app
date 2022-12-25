@@ -1,0 +1,21 @@
+
+%div
+  = link_to new_admin_test_path, class: "btn btn-sm btn-primary" do
+    = fa_icon 'plus', text: "New Test"
+%table.table.table-responsive.table-striped
+  %thead
+    %tr
+      %td Name
+      %td Description
+      %td # Questions
+      %td Actions
+  %tbody
+    - @tests.each do |test|
+      %tr
+        %td= test.name
+        %td= test.description
+        %td= test.questions_count
+        %td
+          = link_to "Edit", edit_admin_test_path(test)
+          = link_to "Delete", admin_test_path(test),  data: { turbo_method: :delete, turbo_confirm: "Are you sure delete the test?"}
+

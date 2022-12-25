@@ -65,6 +65,7 @@ group :development do
   # gem "spring"
 
   gem 'html2haml'
+  gem 'byebug'
 end
 
 group :test do

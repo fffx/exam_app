@@ -11,6 +11,10 @@ Rails.application.routes.draw do
 
     resources :users
     resources :tests do
+      collection do
+        get :new_question_form, to: "questions#new"
+        get :new_option_form, to: "questions#new_option"
+      end
       resources :questions
       resources :options
     end

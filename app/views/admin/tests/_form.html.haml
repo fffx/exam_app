@@ -1,0 +1,32 @@
+= form_with model: [:admin, test], class: "border p-3",  data: {controller: "tests", id: test.id}, id: dom_id(test) do |f|
+  .mb-3
+    = link_to @back_path, class: "btn btn-sm btn-default border" do
+      = fa_icon "arrow-left", text: "Back"
+    = button_tag class: "btn btn-primary btn-sm ms-3" do
+      = fa_icon "save", text: "Save"
+    = link_to new_question_form_admin_tests_path, class: "btn btn-secondary btn-sm float-end", "data-turbo-stream": true,  id: 'add-question' do
+      = fa_icon "plus", text: "Question"
+
+  - if test.errors.any?
+    .alert.alert-warning{:role => "alert"}
+      Could not create a test due to the following issues:
+      %ul
+        - test.errors.each do |error|
+          %li= error.full_message
+  .mb-3.row.align-items-center
+    .col-3
+      %label.form-label Name
+    .col-9
+      = f.text_field :name, placeholder: 'Given the Test a name here...',  class: "form-control"
+  .mb-3.row.align-items-center
+    .col-3
+      %label.form-label Description
+    .col-9
+      = f.text_area :description, placeholder: 'Enter a description here...', class: "form-control"
+  .mb-4
+
+  #question-forms
+    = f.fields_for :questions do |question_form|
+      = render 'admin/questions/question_fields', f: question_form, question_index: question_form.index
+
+

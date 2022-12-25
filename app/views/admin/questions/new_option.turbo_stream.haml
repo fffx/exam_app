@@ -1,0 +1,6 @@
+- question_index = params[:question_index]
+= turbo_stream.append "option-forms-#{question_index}" do
+  - option_index = Time.current.to_i
+  - fields model: @test do |f|
+    - f.fields_for "[questions_attributes][#{question_index}][options_attributes][#{option_index}]", @option do |option_form|
+      = render "option_fields", f: option_form, option_index: option_index

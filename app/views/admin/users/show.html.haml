@@ -1,26 +1,24 @@
-
-.row.p-3.justify-content-center
-  .col-12.col-lg-8.border.p-3
-    .mb-3
-      = link_to admin_users_path, class: "btn btn-sm btn-default border" do
-        = fa_icon "arrow-left", text: "Back"
-      = link_to edit_admin_user_path(@user), class: "btn btn-secondary btn-sm ms-3" do
-        = fa_icon "edit", text: "Edit"
-      = link_to admin_user_path(@user), data:{turbo_method: :delete, turbo_confirm: "Are you sure delete this user?"}, class: "btn btn-danger btn-sm ms-3" do
-        = fa_icon "trash", text: "delete"
-    .mb-3.p-3
-      .row
-        .col-2.text-end
-          %strong Name
-        .col-10
-          = @user.name
-      .row
-        .col-2.text-end
-          %strong Email
-        .col-10
-          = @user.email
-      .row
-        .col-2.text-end
-          %strong Role
-        .col-10
-          = @user.role
+.border.p-3
+  .mb-3
+    = link_to admin_users_path, class: "btn btn-sm btn-default border" do
+      = fa_icon "arrow-left", text: "Back"
+    = link_to edit_admin_user_path(@user), class: "btn btn-secondary btn-sm ms-3" do
+      = fa_icon "edit", text: "Edit"
+    = link_to admin_user_path(@user), data:{turbo_method: :delete, turbo_confirm: "Are you sure delete this user?"}, class: "btn btn-danger btn-sm ms-3" do
+      = fa_icon "trash", text: "delete"
+  .mb-3.p-3
+    .row
+      .col-2.text-end
+        %strong Name
+      .col-10
+        = @user.name
+    .row
+      .col-2.text-end
+        %strong Email
+      .col-10
+        = @user.email
+    .row
+      .col-2.text-end
+        %strong Role
+      .col-10
+        = @user.role
