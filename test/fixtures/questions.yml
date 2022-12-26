@@ -1,7 +1,17 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
+algebra_question_1:
+  name: (G, ·) is a group of order 9, then G is abelian
+  test: algebra_1
 
-two:
-  name: MyString
+algebra_question_2:
+  name: How many generators does the group Z9 have?
+  test: algebra_1
+
+cybersecurity_question_1:
+  name: Is it safe to render user inputs without sanitizing them?
+  test: cybersecurity_1
+
+cybersecurity_question_2:
+  name: Is http a secure channel?
+  test: cybersecurity_1

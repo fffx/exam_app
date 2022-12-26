@@ -3,8 +3,9 @@ class Option < ApplicationRecord
   scope :correct, -> { where(is_correct: true) }
 
   before_destroy :prevent_destroy_last_correct_option
-  validate :ensure_at_least_one_correct_option
 
+  validates_presence_of :name
+  validate :ensure_at_least_one_correct_option
 
   private
 
@@ -13,14 +14,14 @@ class Option < ApplicationRecord
     return unless is_correct_changed?
     return if is_correct
 
-    return if question.options.correct.exists?
+    return if question.options.any?(&:is_correct)
 
     errors.add :is_correct, "at least one correct option is required."
   end
 
   def prevent_destroy_last_correct_option
     if question.options.correct.count == 1 && is_correct
-      errors.add :is_correct, "This is the only correct option, can not be deleted."
+      errors.add :is_correct, "this is the only one correct option, can not be deleted."
       throw(:abort)
     end
   end

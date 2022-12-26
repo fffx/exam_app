@@ -3,7 +3,8 @@ class ApplicationController < ActionController::Base
 
   def authenticate
     if request.headers['Authorization'].present?
-      token = request.headers['Authorization'].split(' ').last
+      token = request.headers['Authorization'].to_s.split(' ').last
+      Rails.logger.debug { "Authentication: #{token}"}
       @current_user = User.find_by(token: token)
       if @current_user.nil?
         render json: { error: 'Invalid token' }, status: :unauthorized

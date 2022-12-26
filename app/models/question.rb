@@ -4,6 +4,7 @@ class Question < ApplicationRecord
 
   accepts_nested_attributes_for :options, reject_if: :all_blank
 
+  validates_presence_of :name
   validate :ensure_at_least_one_correct_option
 
   def ensure_at_least_one_correct_option

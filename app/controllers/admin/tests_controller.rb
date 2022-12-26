@@ -16,23 +16,23 @@ class Admin::TestsController < Admin::AdminController
   end
 
   def create
-    test = Test.new(params[:test].permit(:name, :description))
+    @test = Test.new(params[:test].permit(:name, :description))
     questions = []
-
     params[:test][:questions_attributes].each do |_, question_params|
-      question = test.questions.build(
+      question = @test.questions.build(
         question_params.permit(
           :name, :description,
           options_attributes: [:name, :is_correct]
         )
       )
-
       questions << question
-
     end
 
-    test.save!
-    redirect_to admin_tests_path, notice: "Test created successfully"
+    if @test.save
+      redirect_to admin_tests_path, notice: "Test created successfully"
+    else
+      render :update
+    end
   end
 
   def update
@@ -45,8 +45,8 @@ class Admin::TestsController < Admin::AdminController
       ))
       redirect_to admin_tests_path, notice: "Test updated successfully"
     else
-      # byebug
-      redirect_to edit_admin_test_path(@test), notice: @test.errors.full_messages.join("; ")
+      render :update
+      # redirect_to edit_admin_test_path(@test), notice: @test.errors.full_messages.join("; ")
     end
   end
 

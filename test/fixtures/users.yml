@@ -8,6 +8,6 @@ teacher_john:
 
 student_tom:
   name: Tom
-  email: Tom@example.com
+  email: tom@example.com
   role: student
   password_digest:  <%= BCrypt::Password.create('password') %>

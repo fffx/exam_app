@@ -21,5 +21,13 @@ Rails.application.routes.draw do
 
   end
 
-  resources :users, except: :index
+  scope '/api/v1/' do
+    post :login, to: "users#login"
+    delete :logout, to: "users#logout"
+    resources :tests do
+      member do
+        post :save_results
+      end
+    end
+  end
 end

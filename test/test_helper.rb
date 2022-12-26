@@ -11,3 +11,10 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 end
+
+
+class ActionDispatch::IntegrationTest
+  def json_body
+    response.parsed_body.deep_symbolize_keys
+  end
+end

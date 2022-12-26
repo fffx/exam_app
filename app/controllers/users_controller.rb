@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :authenticate, only: [:token]
+  skip_before_action :authenticate, only: [:login]
 
 
   # params: email, password

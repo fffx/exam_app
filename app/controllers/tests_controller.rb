@@ -2,7 +2,7 @@ class TestsController < ApplicationController
 
   # list tests
   def index
-    render json: {tests: test.all}
+    render json: {tests: Test.all}
   end
 
   # show test by id
@@ -19,12 +19,15 @@ class TestsController < ApplicationController
   def show
     test = Test.find(params[:id])
     render json: {
+      id: test.id,
       name: test.name,
       description: test.description,
       questions: test.questions.map do |q|
         {
+          id: q.id,
           name: q.name,
           description: q.description,
+          options: q.options.pluck(:name)
         }
       end
     }
