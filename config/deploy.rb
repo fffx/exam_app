@@ -12,6 +12,9 @@ set :deploy_to, "/var/www/exam_app"
 set :puma_enable_socket_service, true
 set :puma_phased_restart, true
 
+set :puma_threads,    [4, 16]
+# set :puma_workers,    0
+
 set :keep_assets, 2
 set :migration_role, :app
 
