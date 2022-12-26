@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   # @return token
   #
   def login
-    user = User.find_by(email: params[:email)
+    user = User.find_by(email: params[:email])
     if user && user.authenticate(params[:password])
       user.regenerate_token
       render json: { token: user.token }, status: :ok
