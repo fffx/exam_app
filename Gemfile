@@ -66,6 +66,12 @@ group :development do
 
   gem 'html2haml'
   gem 'byebug'
+
+  gem "capistrano", "~> 3.10", require: false
+  gem "capistrano-rails", "~> 1.3", require: false
+  gem "capistrano-rvm", require: false
+  gem 'capistrano3-puma', require: false
+  gem 'capistrano-bundler', require: false
 end
 
 group :test do

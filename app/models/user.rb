@@ -2,6 +2,7 @@ class User < ApplicationRecord
   ROLES = ['student', 'teacher'].freeze
 
   has_secure_password
+  has_secure_token
 
   validates :email, presence: true, uniqueness: true, format: /\A.+@.+\Z/
   validates :role, presence: true, inclusion: { in: User::ROLES,

@@ -1,28 +1,23 @@
 class UsersController < ApplicationController
-  before_action :authenticate!, except: [:login]
+  skip_before_action :authenticate, only: [:token]
 
-  def index
-    return redirect_to(admin_login_path) unless current_user
 
-    @users = User.order(Arel.sql("CASE WHEN users.role='teacher' THEN 0 ELSE 1 END")).all
-  end
-
-  def destroy
-    user = User.find_by_id(params[:id]))
-  end
-
+  # params: email, password
+  # @return token
+  #
   def login
-    return render :login unless request.post?
-
-    teacher = User.teachers.find_by(email: params[:email])
-    return redirect_to admin_root_path, flash: {notice: "Account not found or you are not a teacher"} if teacher.nil?
-
-
-    if teacher.authenticate params[:password]
-      session[:user_id] = teacher.id
-      redirect_to admin_root_path, flash: {notice: "Login successful"}
+    user = User.find_by(email: params[:email)
+    if user && user.authenticate(params[:password])
+      user.regenerate_token
+      render json: { token: user.token }, status: :ok
     else
-      redirect_to admin_root_path, flash: {notice: "Password does not match."}
+      render json: { error: 'Invalid email or password' }, status: :unauthorized
     end
+  end
+
+
+  def logout
+    current_user.regenerate_token
+    render json: {success: true}, status: :ok
   end
 end

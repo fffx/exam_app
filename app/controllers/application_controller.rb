@@ -1,29 +1,20 @@
 class ApplicationController < ActionController::Base
-  before_action :set_back_path
+  before_action :authenticate
 
-
-  private
-
-  def set_back_path
-
-    @back_path = if request.referer.blank?
-      admin_root_path
-    elsif request.referer.end_with?(request.path)
-      request.path =~ /^\/admin\/tests\// ? admin_tests_path : admin_users_path
+  def authenticate
+    if request.headers['Authorization'].present?
+      token = request.headers['Authorization'].split(' ').last
+      @current_user = User.find_by(token: token)
+      if @current_user.nil?
+        render json: { error: 'Invalid token' }, status: :unauthorized
+      end
     else
-      request.referer
+      render json: { error: 'Authorization header is missing' }, status: :unauthorized
     end
   end
 
+
   def current_user
-    @current_user ||= User.find_by(id: session[:user_id] || cookies.signed[:user_id] )
+    @current_user
   end
-
-  def sign_out_current_user
-    session[:user_id] = nil
-    cookies.signed[:user_id] = nil
-    @current_user = nil
-  end
-
-  helper_method :current_user
 end
