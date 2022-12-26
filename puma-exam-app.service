@@ -1,0 +1,18 @@
+[Unit]
+Description=Exam APP Puma HTTP
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/var/www/exam_app/current
+ExecStart=/home/ubuntu/.rvm/bin/rvm default do bundle exec puma -C /var/www/exam_app/shared/puma.rb
+ExecReload=/bin/kill -TSTP $MAINPID
+StandardOutput=append:/var/www/exam_app/current/log/puma.access.log
+StandardError=append:/var/www/exam_app/current/log/puma.error.log
+Restart=always
+RestartSec=1
+SyslogIdentifier=puma
+
+[Install]
+WantedBy=multi-user.target

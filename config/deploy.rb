@@ -7,12 +7,13 @@ set :branch, "main"
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
+set :bundle_jobs, 1
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/var/www/exam_app"
 set :puma_enable_socket_service, true
 set :puma_phased_restart, true
 
-set :puma_threads,    [4, 16]
+set :puma_threads, [4, 16]
 # set :puma_workers,    0
 
 set :keep_assets, 2
@@ -53,10 +54,21 @@ namespace :deploy do
   namespace :check do
     before :linked_files, :set_master_key do
       on roles(:app), in: :sequence, wait: 10 do
-        unless test("[ -f #{shared_path}/config/master.key ]")
-          upload! 'config/master.key', "#{shared_path}/config/master.key"
+        unless test("[ -f #{fetch(:shared_path)}/config/master.key ]")
+          upload! 'config/master.key', "#{fetch(:shared_path)}/config/master.key"
         end
       end
     end
   end
+
+  desc "reload the database with seed data"
+  task :seed do
+    on roles(:db) do
+      within current_path do
+        execute :bundle, "exec rake db:seed RAILS_ENV=#{fetch(:rails_env)}"
+      end
+    end
+  end
 end
+
+
