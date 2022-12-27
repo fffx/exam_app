@@ -1,12 +1,12 @@
-%fieldset.mb-2
+%fieldset.mb-2{id: f.object.persisted? ? "fieldset-#{dom_id(f.object)}" : nil}
   -# - if f.object.errors.any?
     .alert.alert-warning{:role => "alert"}
       Could not create a option due to the following issues:
       %ul
         - f.object.errors.each do |error|
           %li= error.full_message
-  .mb-3.row
-    .col-8
+  .mb-3.row.justify-content-end
+    .col-7
       = f.text_field :name, placeholder: 'Give a ption here...', class: "form-control"
     .col-3
       .form-check

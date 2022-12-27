@@ -31,13 +31,13 @@ export default class extends Controller {
       }
       fetch(url, {
           method: 'DELETE',
-          headers: {'X-CSRF-Token': this.token}
+          headers: {
+            'X-CSRF-Token': this.token,
+            'Accept': "text/vnd.turbo-stream.html, text/html",
+          }
         }
-      ).then( response => {
-        if (response.redirected) {
-          Turbo.visit(response.url);
-        }
-    })
+      ).then(r => r.text())
+      .then(html => Turbo.renderStreamMessage(html))
     } else {
       event.target.closest("fieldset").remove()
     }

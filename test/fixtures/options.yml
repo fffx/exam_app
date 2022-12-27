@@ -1,43 +1,43 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 correct_option_1:
-  name: 2
+  name: '2'
   is_correct: true
   question: algebra_question_1
 
 correct_option_2:
-  name: no
+  name: 'Nope'
   is_correct: true
   question: algebra_question_2
 
 correct_option_3:
-  name: yes
+  name: 'Yes'
   is_correct: true
   question: cybersecurity_question_1
 
 correct_option_4:
-  name: no
-  is_correct: no
+  name: 'No'
+  is_correct: true
   question: cybersecurity_question_2
 
 
 incorrect_option_1:
-  name: 4
+  name: '4'
   is_correct: false
   question: algebra_question_1
 
 incorrect_option_2:
-  name: no
-  is_correct: yes
+  name: 'No'
+  is_correct: true
   question: algebra_question_2
 
 incorrect_option_3:
-  name: yes
+  name: 'Yes'
   is_correct: false
   question: cybersecurity_question_1
 
 incorrect_option_4:
-  name: no
+  name: 'No'
   is_correct: false
   question: cybersecurity_question_2
 

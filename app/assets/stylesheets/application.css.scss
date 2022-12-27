@@ -17,3 +17,16 @@
 
  @import "bootstrap";
  @import 'font_awesome5_webfont';
+
+ .option-forms {
+  counter-reset: css-counter 0;
+  fieldset > .row{
+    counter-increment: css-counter 1;
+    &:before {
+      content: counter(css-counter) ". ";
+      vertical-align: middle;
+    }
+  }
+
+ }
+

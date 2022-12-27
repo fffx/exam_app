@@ -12,7 +12,8 @@
     .container.mt-2
       - if current_user
         = render 'application/navbar'
-      = render 'application/flash_msg'
+      #flash-messages
+        = render 'application/flash_msg'
       .row.p-3.justify-content-center
         .col-12.col-lg-9
           = yield

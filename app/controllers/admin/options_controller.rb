@@ -8,13 +8,22 @@ class Admin::OptionsController < Admin::AdminController
 
   def destroy
     @test = Test.find(params[:test_id])
-    option = @test.options.find(params[:id])
-    if option.destroy
-      flash[:notice] = "Option deleted successfully."
+    @option = @test.options.find(params[:id])
+    message = if @option.destroy
+      "Option deleted successfully."
     else
-      flash[:notice] = option.errors.first.message
+      @option.errors.first.message
     end
-    redirect_back fallback_location: admin_test_path(@test)
+
+    respond_to do |format|
+      format.html {
+        redirect_back notice: message, fallback_location: admin_test_path(@test)
+      }
+
+      format.turbo_stream {
+        flash.now[:notice] = message
+      }
+    end
   end
 
 end

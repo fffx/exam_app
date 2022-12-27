@@ -1,0 +1,6 @@
+= turbo_stream.prepend "flash-messages" do
+  = render "application/flash_msg"
+
+= turbo_stream.remove "fieldset-#{dom_id(@question)}" if @question.destroyed?
+
+

@@ -43,7 +43,7 @@ class TestsControllerTest < ActionDispatch::IntegrationTest
 
     post(
       save_results_test_path(@test),
-      params: {test_id: @test.id, answers: [{question_id: 1, answer_option_id: 2}]},
+      params: {answers: [{question_id: 1, answer_option_id: 2}]},
       headers: {Authorization: @user.token}
     )
 

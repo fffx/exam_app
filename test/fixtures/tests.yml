@@ -3,7 +3,9 @@
 algebra_1:
   name: Algebra 1
   description: Algebra 1 exam will test all problems from our course
+  questions_count: 2
 
 cybersecurity_1:
   name: Cybersecurity 1
   description: You will have 10 minutes to upload your code
+  questions_count: 2

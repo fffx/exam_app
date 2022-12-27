@@ -1,4 +1,4 @@
-%fieldset.border.p-3.mb-3
+%fieldset.border.p-3.mb-3{id: f.object.persisted? ? "fieldset-#{dom_id(f.object)}" : nil}
   - if f.object.errors.any?
     .alert.alert-warning{:role => "alert"}
       Could not create a question due to the following issues:
@@ -13,7 +13,7 @@
         = fa_icon "trash", text: "question"
   .mb-3
     = f.text_area :description, placeholder: 'Enter a description here...', class: "form-control"
-  %div{id: "option-forms-#{question_index}"}
+  .option-forms{id: "option-forms-#{question_index}"}
     = f.fields_for :options do |options_form|
       = render "admin/questions/option_fields", f: options_form, option_index: f.index
 

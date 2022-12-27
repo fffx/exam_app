@@ -21,7 +21,15 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     delete logout_path
     assert_response :unauthorized
 
+    old_token = @user.token
+
     delete logout_path, headers: { 'Authorization' => @user.token }
     json_body => { success: }
+
+    @user.reload
+    assert old_token != @user.token
+
+    delete logout_path, headers: { 'Authorization' => old_token }
+    assert_response :unauthorized
   end
 end

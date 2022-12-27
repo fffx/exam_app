@@ -5,6 +5,11 @@ teacher_john:
   email: John@example.com
   role: teacher
   password_digest:  <%= BCrypt::Password.create('password') %>
+teacher:
+  name: teacher
+  email: teacher@example.com
+  role: teacher
+  password_digest:  <%= BCrypt::Password.create('12345678') %>
 
 student_tom:
   name: Tom
